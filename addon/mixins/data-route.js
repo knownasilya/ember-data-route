@@ -21,6 +21,13 @@ export default Ember.Mixin.create({
   },
   willTransitionConfirm: function(transition) {
     /*jshint unused:false*/
+    var config = this.container.lookup('config:environment');
+    var addonConfig = config['ember-data-route'];
+
+    if (addonConfig && addonConfig.defaultConfirm) {
+      return confirm(addonConfig.defaultConfirm);
+    }
+
     return true;
   }
 });
